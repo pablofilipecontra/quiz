@@ -1,42 +1,44 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Cidade do Usuário</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cidade do Usuário</title>
+  </head>
 
-  <h1 id="city-title">Carregando sua cidade...</h1>
+  <body>
+    <h1 id="city-title">Carregando sua cidade...</h1>
+    <code>
+      <pre id="json-output"></pre>
+    </code>
 
-  <script>
-    // Primeiro tenta pegar do localStorage (mais rápido)
-    const savedCity = localStorage.getItem('user_city');
+    <script>
+      const cityTitle = document.getElementById('city-title');
+      const jsonOutput = document.getElementById('json-output');
 
-    if (savedCity) {
-      document.getElementById('city-title').innerText =
-        `Você está acessando de ${savedCity}`;
-    } else {
+      const savedCity = localStorage.getItem('user_city');
+
+      if (savedCity) {
+        cityTitle.innerText = `Você está acessando de ${savedCity}`;
+      }
+
+      // SEMPRE busca o JSON
       fetch('https://ipapi.co/json/')
         .then(response => response.json())
         .then(data => {
-          const city = data.city;
+          // Mostra o JSON
+          jsonOutput.innerText = JSON.stringify(data, null, 2);
 
-          if (city) {
-            localStorage.setItem('user_city', city);
-            document.getElementById('city-title').innerText =
-              `Você está acessando de ${city}`;
-          } else {
-            document.getElementById('city-title').innerText =
-              'Bem-vindo!';
+          // Atualiza cidade se ainda não existir
+          if (!savedCity && data.city) {
+            localStorage.setItem('user_city', data.city);
+            cityTitle.innerText = `Você está acessando de ${data.city}`;
           }
         })
         .catch(err => {
           console.error('Erro ao obter localização', err);
-          document.getElementById('city-title').innerText =
-            'Bem-vindo!';
+          cityTitle.innerText = 'Bem-vindo!';
         });
-    }
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>

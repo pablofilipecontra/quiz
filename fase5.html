@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .container {
+                max-width: 900px;
+                margin: auto;
+            }
+
+            .timeline {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                background: #ffffff;
+                border-radius: 10px;
+                padding: 25px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            }
+
+            .period {
+                font-weight: bold;
+                color: #FB8F13;
+                margin-bottom: 10px;
+                font-size: 18px;
+            }
+
+            .description {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            @media (max-width: 700px) {
+                .timeline {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="timeline">
+                <div class="card">
+                    <div class="period">SEMANAS 1–4</div>
+                    <div class="description">
+                        Fundamentos Dominar herramientas de IA, crear primeros trabajos, armar portfolio básico.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="period">SEMANAS 5–8</div>
+                    <div class="description">
+                        Primeros Clientes Conocer plataformas, hacer propuestas, conquistar primeros clientes.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="period">MES 3–4</div>
+                    <div class="description">
+                        Crecimiento Expandir clientes, refinar procesos, construir reputación.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="period">MES 5–6</div>
+                    <div class="description">
+                        Consolidación Clientes recurrentes, aumentar valor, especializarse.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
