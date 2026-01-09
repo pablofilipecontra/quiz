@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cidade do Usuário</title>
+</head>
+<body>
+
+  <h1 id="city-title">Carregando sua cidade...</h1>
+
+  <script>
+    // Primeiro tenta pegar do localStorage (mais rápido)
+    const savedCity = localStorage.getItem('user_city');
+
+    if (savedCity) {
+      document.getElementById('city-title').innerText =
+        `Você está acessando de ${savedCity}`;
+    } else {
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          const city = data.city;
+
+          if (city) {
+            localStorage.setItem('user_city', city);
+            document.getElementById('city-title').innerText =
+              `Você está acessando de ${city}`;
+          } else {
+            document.getElementById('city-title').innerText =
+              'Bem-vindo!';
+          }
+        })
+        .catch(err => {
+          console.error('Erro ao obter localização', err);
+          document.getElementById('city-title').innerText =
+            'Bem-vindo!';
+        });
+    }
+  </script>
+
+</body>
+</html>
